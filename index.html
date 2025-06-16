@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Analista de Dados</title>
+    <style>
+        :root {
+            /* Tema Claro (padrão) */
+            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.9);
+            --bg-card: white;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --text-light: white;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.2);
+            --gradient: linear-gradient(90deg, #667eea, #764ba2);
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        [data-theme="dark"] {
+            /* Tema Escuro */
+            --bg-primary: linear-gradient(135deg, #232526 0%, #414345 100%);
+            --bg-secondary: rgba(30, 30, 30, 0.95);
+            --bg-card: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-light: white;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(90deg, #667eea, #764ba2);
+            --navbar-bg: rgba(30, 30, 30, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(10px);
+            padding: 60px 0;
+            text-align: center;
+            box-shadow: 0 2px 20px var(--shadow);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-image {
+            flex-shrink: 0;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .profile-image img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--gradient);
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px var(--shadow-hover);
+        }
+
+        .profile-info {
+            text-align: left;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .profile-info h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .profile-info p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        /* Seções */
+        section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            margin: 40px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        /* Seção Sobre Mim */
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .about-intro {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .about-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .skill-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .skill-level {
+            background: var(--text-secondary);
+            opacity: 0.3;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+            transition: width 2s ease-in-out;
+        }
+
+        .experience-highlight {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .exp-item {
+            text-align: center;
+        }
+
+        .exp-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .exp-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Projetos Power BI */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-hover);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-iframe iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-iframe iframe {
+            transform: scale(1.02);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-button {
+            display: inline-block;
+            background: var(--gradient);
+            color: var(--text-light);
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .project-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Certificações - Carrossel */
+        .carousel-container {
+            position: relative;
+            margin-top: 50px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: transform 0.3s ease;
+            min-width: 350px;
+            flex-shrink: 0;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cert-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cert-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Botões do carrossel */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(102, 126, 234, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        /* Indicadores */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+
+        .cert-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .cert-details {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .cert-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contato */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                gap: 25px;
+                text-align: center;
+            }
+
+            .profile-info {
+                text-align: center;
+            }
+
+            .profile-info h1 {
+                font-size: 2.2rem;
+            }
+
+            .profile-info p {
+                font-size: 1.1rem;
+            }
+
+            .profile-image img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-iframe {
+                height: 250px;
+            }
+
+            .project-iframe iframe {
+                height: 100%;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-link {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            /* Carrossel responsivo */
+            .cert-card {
+                min-width: calc(100vw - 80px);
+                margin: 0 10px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .carousel-btn.prev {
+                left: 10px;
+            }
+
+            .carousel-btn.next {
+                right: 10px;
+            }
+
+            /* Sobre Mim responsivo */
+            .about-intro {
+                font-size: 1.1rem;
+            }
+
+            .about-description {
+                font-size: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .experience-highlight {
+                gap: 40px;
+            }
+
+            .exp-number {
+                font-size: 2.5rem;
+            }
+
+            /* Toggle de tema responsivo */
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .theme-toggle-btn {
+                width: 50px;
+                height: 25px;
+            }
+
+            .theme-toggle-btn::before {
+                width: 19px;
+                height: 19px;
+            }
+
+            [data-theme="dark"] .theme-toggle-btn::before {
+                transform: translateX(23px);
+            }
+
+            /* Botão scroll responsivo */
+            .scroll-to-top-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .scroll-arrow {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar fixa */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Toggle de Tema */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--text-secondary);
+            border-radius: 25px;
+            width: 60px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            overflow: hidden;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-btn::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--gradient);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        [data-theme="dark"] .theme-toggle-btn::before {
+            transform: translateX(28px);
+        }
+
+        .sun-icon, .moon-icon {
+            font-size: 12px;
+            z-index: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sun-icon {
+            opacity: 1;
+        }
+
+        .moon-icon {
+            opacity: 0.5;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            opacity: 0.5;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            opacity: 1;
+        }
+
+        /* Botão Voltar ao Topo */
+        .scroll-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--shadow);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 30px var(--shadow-hover);
+        }
+
+        .scroll-to-top-btn:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+
+        .scroll-arrow {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#certifications">Certificações</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                
+                <!-- Toggle de Tema -->
+                <div class="theme-toggle">
+                    <button id="theme-toggle-btn" class="theme-toggle-btn" onclick="toggleTheme()">
+                        <span class="sun-icon">☀️</span>
+                        <span class="moon-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cabeçalho -->
+            <header id="home">
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <img src="eu2.png" alt="Andriell Castro - Analista de Dados">
+                    </div>
+                    <div class="profile-info">
+                        <h1>Andriell Castro</h1>
+                        <p>Analista de Dados | Especialista em Power BI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Sobre Mim -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">
+                        Com mais de <strong>7 anos de experiência</strong> na área de tecnologia, sou especialista em transformar dados em insights estratégicos que impulsionam resultados de negócio.
+                    </p>
+                    <p class="about-description">
+                        Minha expertise abrange desde a <strong>análise e modelagem de dados</strong> até a criação de <strong>dashboards interativos</strong> que facilitam a tomada de decisões. Tenho sólida experiência em projetos de Business Intelligence, automação de processos e desenvolvimento de soluções analíticas.
+                    </p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">📊</div>
+                        <h3>Power BI</h3>
+                        <p>Criação de dashboards interativos, modelagem de dados, DAX avançado e integração com múltiplas fontes</p>
+                        <div class="skill-level">
+                            <div class="skill-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <div class="skill-icon">📈</div>
+                        <h3>Excel Avançado</h3>
+                        <p>Fórmulas complexas, tabelas dinâmicas, macros VBA e automação de relatórios</p>
+                        <div class="skill-level">
+                            <div class="skill-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <div class="skill-icon">🗄️</div>
+                        <h3>SQL & Bancos de Dados</h3>
+                        <p>Consultas complexas, otimização de queries, Oracle PL/SQL e modelagem de dados</p>
+                        <div class="skill-level">
+                            <div class="skill-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-highlight">
+                    <div class="exp-item">
+                        <div class="exp-number">7+</div>
+                        <div class="exp-label">Anos de Experiência</div>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-number">50+</div>
+                        <div class="exp-label">Projetos Entregues</div>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-number">93h</div>
+                        <div class="exp-label">Certificações</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Projetos -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projetos em Power BI</h2>
+            <div class="projects-grid">
+                <!-- Projeto 1: DASH CARTÕES -->
+                <div class="project-card fade-in">
+                    <div class="project-iframe">
+                        <iframe title="DASH CARTÕES" width="100%" height="300" src="https://app.powerbi.com/view?r=eyJrIjoiOGU5NzI0ZTctNjA2MC00OGFiLTk0MjItMGRjYTIzODA2OTgyIiwidCI6IjY2NDBlM2QyLTAwZTYtNDU0Mi05OWY1LTE1OWZhODhkM2Y0YyJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">DASH CARTÕES</h3>
+                        <p class="project-description">
+                            Dashboard completo para análise de dados de cartões de crédito, 
+                            incluindo métricas de performance, análise de inadimplência e 
+                            segmentação de clientes.
+                        </p>
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiOGU5NzI0ZTctNjA2MC00OGFiLTk0MjItMGRjYTIzODA2OTgyIiwidCI6IjY2NDBlM2QyLTAwZTYtNDU0Mi05OWY1LTE1OWZhODhkM2Y0YyJ9" 
+                           class="project-button" target="_blank">Ver Dashboard Completo</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 2: DASH RH -->
+                <div class="project-card fade-in">
+                    <div class="project-iframe">
+                        <iframe title="DASH RECURSOS HUMANOS" width="100%" height="300" src="https://app.powerbi.com/view?r=eyJrIjoiZGI5ZGFiMmQtOTBjNi00OGFkLTliNWEtOWQzOGJkOTAyOTc2IiwidCI6IjY2NDBlM2QyLTAwZTYtNDU0Mi05OWY1LTE1OWZhODhkM2Y0YyJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">DASH RH</h3>
+                        <p class="project-description">
+                            Sistema de análise de recursos humanos com indicadores de 
+                            performance, turnover, satisfação dos colaboradores e 
+                            métricas de produtividade.
+                        </p>
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiZGI5ZGFiMmQtOTBjNi00OGFkLTliNWEtOWQzOGJkOTAyOTc2IiwidCI6IjY2NDBlM2QyLTAwZTYtNDU0Mi05OWY1LTE1OWZhODhkM2Y0YyJ9" 
+                           class="project-button" target="_blank">Ver Dashboard Completo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Certificações -->
+            <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certificações e Estudos</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
+                <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
+                
+                <div class="carousel-wrapper" id="carousel">
+                    <!-- Slides duplicados para loop infinito - Final -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="powerautomate.png" alt="Certificado PowerAutomate" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">⚡ PowerAutomate</div>
+                        </div>
+                        <h3 class="cert-title">PowerAutomate</h3>
+                        <p class="cert-details">Escola do Trabalhador 4.0 - Microsoft</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">1</div>
+                                <div class="stat-label">Hora</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Nota</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="powerbi.png" alt="Certificado PowerBI Escola do Trabalhador" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">📊 PowerBI</div>
+                        </div>
+                        <h3 class="cert-title">PowerBI</h3>
+                        <p class="cert-details">Escola do Trabalhador 4.0 - Microsoft</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">87,5%</div>
+                                <div class="stat-label">Nota</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slides originais -->
+                    <!-- Certificação 1: Oracle PL/SQL -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="plsqloracle.png" alt="Certificado Oracle PL/SQL" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">🏛️ Oracle PL/SQL</div>
+                        </div>
+                        <h3 class="cert-title">Banco de Dados: Oracle PL/SQL</h3>
+                        <p class="cert-details">Instituto Federal do Rio Grande do Sul</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">20</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">93,3%</div>
+                                <div class="stat-label">Nota</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificação 2: SQL Completo Udemy -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="ocursocompleto de banco de dados e sql.png" alt="Certificado SQL Udemy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">🎓 SQL Completo</div>
+                        </div>
+                        <h3 class="cert-title">Banco de Dados e SQL Completo</h3>
+                        <p class="cert-details">Udemy - Felipe Mafra</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">58</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Concluído</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificação 3: Power BI Udemy -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="powerbidobasicoaoavançado.png" alt="Certificado PowerBI Udemy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">📈 PowerBI Avançado</div>
+                        </div>
+                        <h3 class="cert-title">Power BI - Do Básico ao Avançado</h3>
+                        <p class="cert-details">Udemy - João Paulo de Lira</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">10</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Concluído</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificação 4: PowerAutomate -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="powerautomate.png" alt="Certificado PowerAutomate" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">⚡ PowerAutomate</div>
+                        </div>
+                        <h3 class="cert-title">PowerAutomate</h3>
+                        <p class="cert-details">Escola do Trabalhador 4.0 - Microsoft</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">1</div>
+                                <div class="stat-label">Hora</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Nota</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificação 5: PowerBI Escola do Trabalhador -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="powerbi.png" alt="Certificado PowerBI Escola do Trabalhador" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">📊 PowerBI</div>
+                        </div>
+                        <h3 class="cert-title">PowerBI</h3>
+                        <p class="cert-details">Escola do Trabalhador 4.0 - Microsoft</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">87,5%</div>
+                                <div class="stat-label">Nota</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slides duplicados para loop infinito - Início -->
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="plsqloracle.png" alt="Certificado Oracle PL/SQL" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">🏛️ Oracle PL/SQL</div>
+                        </div>
+                        <h3 class="cert-title">Banco de Dados: Oracle PL/SQL</h3>
+                        <p class="cert-details">Instituto Federal do Rio Grande do Sul</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">20</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">93,3%</div>
+                                <div class="stat-label">Nota</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <img src="ocursocompleto de banco de dados e sql.png" alt="Certificado SQL Udemy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; height:100%; background: linear-gradient(45deg, #667eea, #764ba2); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">🎓 SQL Completo</div>
+                        </div>
+                        <h3 class="cert-title">Banco de Dados e SQL Completo</h3>
+                        <p class="cert-details">Udemy - Felipe Mafra</p>
+                        <div class="cert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">58</div>
+                                <div class="stat-label">Horas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Concluído</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <span class="indicator active" onclick="goToSlide(0)"></span>
+                    <span class="indicator" onclick="goToSlide(1)"></span>
+                    <span class="indicator" onclick="goToSlide(2)"></span>
+                    <span class="indicator" onclick="goToSlide(3)"></span>
+                    <span class="indicator" onclick="goToSlide(4)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-content">
+                <p style="font-size: 1.2rem; color: #7f8c8d; margin-bottom: 30px;">
+                    Vamos conversar sobre oportunidades e projetos!
+                </p>
+                <div class="contact-links">
+                    <!-- SUBSTITUA AQUI: Insira seu email -->
+                    <a href="mailto:Andriellcastroneves@gmail.com" class="contact-link">
+                        <div class="contact-icon">✉</div>
+                        <span>Email</span>
+                    </a>
+                    
+                    <!-- SUBSTITUA AQUI: Insira seu link do LinkedIn -->
+                    <a href="https://www.linkedin.com/in/andriell-c-7484b793/" class="contact-link" target="_blank">
+                        <div class="contact-icon">💼</div>
+                        <span>LinkedIn</span>
+                    </a>
+                    
+                    <!-- SUBSTITUA AQUI: Insira seu link do Facebook -->
+                    <a href="https://wa.me/5562982451401" class="contact-link" target="_blank">
+                        <div class="contact-icon">💬</div>
+                        <span>WhatsApp</span>
+                    </a>
+                    
+                    <!-- SUBSTITUA AQUI: Adicione outras redes sociais se desejar -->
+                    <a href="https://github.com/Andriell99" class="contact-link" target="_blank">
+                        <div class="contact-icon">🐱</div>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="scroll-to-top" class="scroll-to-top-btn" onclick="scrollToTop()">
+        <span class="scroll-arrow">↑</span>
+    </button>
+
+    <script>
+        // Animação de entrada ao rolar a página
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos os elementos com animação
+        document.querySelectorAll('.project-card, .cert-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll para links da navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efeito de parallax sutil no header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Carrossel de Certificações com Loop Infinito
+        let currentSlide = 2; // Começa no terceiro slide (primeiro slide real)
+        const totalSlides = 5; // Número de slides reais
+        const totalSlidesWithDuplicates = 9; // Total incluindo duplicados
+        const slideWidth = 380; // 350px + 30px gap
+        let isTransitioning = false;
+
+        // Inicializa o carrossel na posição correta
+        function initCarousel() {
+            const carousel = document.getElementById('carousel');
+            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+
+        function moveCarousel(direction) {
+            if (isTransitioning) return;
+            
+            const carousel = document.getElementById('carousel');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            isTransitioning = true;
+            currentSlide += direction;
+            
+            // Move o carrossel com transição
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            
+            // Verifica se precisa resetar a posição (loop infinito)
+            setTimeout(() => {
+                if (currentSlide >= totalSlidesWithDuplicates - 2) {
+                    // Se chegou ao final, volta para o início real sem transição
+                    currentSlide = 2;
+                    carousel.style.transition = 'none';
+                    carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                } else if (currentSlide < 2) {
+                    // Se voltou para o início, vai para o final real sem transição
+                    currentSlide = totalSlides + 1;
+                    carousel.style.transition = 'none';
+                    carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                }
+                
+                // Atualiza indicadores baseado na posição real
+                const realSlideIndex = ((currentSlide - 2) % totalSlides + totalSlides) % totalSlides;
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === realSlideIndex);
+                });
+                
+                isTransitioning = false;
+            }, 500);
+        }
+
+        function goToSlide(slideIndex) {
+            if (isTransitioning) return;
+            
+            const carousel = document.getElementById('carousel');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            isTransitioning = true;
+            currentSlide = slideIndex + 2; // Ajusta para a posição real (pula os 2 slides duplicados no início)
+            
+            // Move o carrossel
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            
+            // Atualiza indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === slideIndex);
+            });
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
+
+        // Auto-play do carrossel
+        setInterval(() => {
+            moveCarousel(1);
+        }, 5000); // Muda slide a cada 5 segundos
+
+        // Responsividade do carrossel
+        function updateCarouselWidth() {
+            const isMobile = window.innerWidth <= 768;
+            const newSlideWidth = isMobile ? window.innerWidth - 40 : 380;
+            
+            if (window.slideWidth !== newSlideWidth) {
+                window.slideWidth = newSlideWidth;
+                const carousel = document.getElementById('carousel');
+                carousel.style.transform = `translateX(-${currentSlide * newSlideWidth}px)`;
+            }
+        }
+
+        window.addEventListener('resize', updateCarouselWidth);
+        updateCarouselWidth(); // Chama na inicialização
+        
+        // Inicializa o carrossel
+        document.addEventListener('DOMContentLoaded', initCarousel);
+
+        // Sistema de Tema Claro/Escuro
+        function initTheme() {
+            // Verifica se há preferência salva no localStorage
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Define o tema inicial
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            setTheme(initialTheme);
+        }
+
+        function setTheme(theme) {
+            const html = document.documentElement;
+            const toggleBtn = document.getElementById('theme-toggle-btn');
+            
+            if (theme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        // Detecta mudanças na preferência do sistema
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Inicializa o tema quando a página carrega
+        document.addEventListener('DOMContentLoaded', initTheme);
+
+        // Botão Voltar ao Topo
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function toggleScrollButton() {
+            const scrollBtn = document.getElementById('scroll-to-top');
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollPosition > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        }
+
+        // Monitora o scroll da página
+        window.addEventListener('scroll', toggleScrollButton);
+
+        // Inicializa o botão de scroll
+        document.addEventListener('DOMContentLoaded', toggleScrollButton);
+    </script>
+</body>
+</html> 
